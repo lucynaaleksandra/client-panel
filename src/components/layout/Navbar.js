@@ -84,7 +84,7 @@ class Navbar extends Component {
               </ul>
             ) : null}
 
-            {allowRegistration && !isAuthenticated ? (
+            {!isAuthenticated ? (
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to="/login" className="nav-link">
