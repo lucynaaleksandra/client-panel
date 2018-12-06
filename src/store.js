@@ -1,10 +1,17 @@
-import { createStore, combineReducers, compose } from 'redux'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import firebase from 'firebase'
 import 'firebase/firestore'
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import { reactReduxFirebase, firebaseReducer } from 'react-redux-firebase'
 import { reduxFirestore, firestoreReducer } from 'redux-firestore'
 import notifyReducer from './reducers/notifyReducer'
 import settingsReducer from './reducers/settingsReducer'
+
+// @todo destructure process.env vars
+// const {
+//   API_KEY,
+//  ... 
+// } = process.env
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const AUTH_DOMAINN = process.env.REACT_APP_AUTH_DOMAINN
@@ -32,8 +39,9 @@ const rrfConfig = {
 firebase.initializeApp(firebaseConfig)
 // init firestore
 const firestore = firebase.firestore()
-const settings = {/* your settings... */ timestampsInSnapshots: true };
-firestore.settings(settings);
+firestore.settings({
+  timestampsInSnapshots: true,
+});
 
 
 // Add reactReduxFirebase enhancer when making store creator
@@ -72,10 +80,10 @@ const initialState = { settings: JSON.parse(localStorage.getItem("settings")) }
 const store = createStoreWithFirebase(
   rootReducer,
   initialState,
-  compose(
-    reactReduxFirebase(firebase),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  // compose(
+  //   reactReduxFirebase(firebase),
+  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // )
 )
 
 export default store

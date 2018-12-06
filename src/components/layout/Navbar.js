@@ -50,7 +50,7 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-                    <div className="collapse navbar-collapse" id="navbarMain">
+          <div className="collapse navbar-collapse" id="navbarMain">
             <ul className="navbar-nav mr-auto">
               {isAuthenticated ? (
                 <li className="nav-item">
